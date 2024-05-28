@@ -28,3 +28,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .card {
+    @apply bg-white shadow-sm drop-shadow-sm border border-solid border-gray-200 rounded-xl overflow-hidden flex flex-col;
+  }
+}

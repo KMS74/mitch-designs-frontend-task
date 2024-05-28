@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          "50": "#f6ffe4",
+          "50": "#edefeb",
           "100": "#e9ffc5",
           "200": "#d3ff92",
           "300": "#b5ff53",
@@ -50,6 +50,9 @@ const config: Config = {
           "900": "#3d3d3c",
           "950": "#262626",
         },
+      },
+      borderRadius: {
+        xl: "1.5rem",
       },
     },
   },
