@@ -1,5 +1,4 @@
 class ProductService {
-
   async fetchProducts(
     page: number,
     searchQuery = "",
@@ -9,7 +8,6 @@ class ProductService {
     try {
       let products = [];
       const res = await fetch("https://woosonicpwa.com/MitchAPI/filter.php", {
-        cache: "no-store", // no-cache the response
         method: "POST",
         body: JSON.stringify({
           category: category, //for filter specific category
@@ -29,7 +27,6 @@ class ProductService {
       const jsonArrayMatch = resText.match(/\[.*\]/s);
       if (jsonArrayMatch) products = JSON.parse(jsonArrayMatch[0]);
 
-      console.log(products);
       return products;
     } catch (error) {
       console.log(error);
