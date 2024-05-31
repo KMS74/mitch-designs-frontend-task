@@ -1,39 +1,26 @@
-class ProductService {
-  async fetchProducts(
-    page: number,
-    searchQuery = "",
-    category = "Coffee",
-    productsPerPage = 12
-  ) {
-    try {
-      let products = [];
-      const res = await fetch("https://woosonicpwa.com/MitchAPI/filter.php", {
-        method: "POST",
-        body: JSON.stringify({
-          category: category, //for filter specific category
-          price_range: [0, 100000000], // for filter price range
-          products_per_page: productsPerPage, // per page
-          page: page, // page number
-          sort: {
-            criteria: "date",
-            arrangement: "DESC",
-          },
-          keyword: searchQuery, // keyword to search products (title, description)
-        }),
-      });
-      // ! NOTE: because the response is not a valid JSON, we need to extract the JSON array from the response text.
-      // ! The api returns an a warning message before the JSON array.
-      const resText = await res.text();
-      const jsonArrayMatch = resText.match(/\[.*\]/s);
-      if (jsonArrayMatch) products = JSON.parse(jsonArrayMatch[0]);
+import { unstable_noStore as noStore } from "next/cache";
+import axios from "axios";
+import { Product } from "../types/product.type";
+import { API_URL, CATEGORY, PRODUCTS_PER_PAGE } from "../constants";
 
-      return products;
-    } catch (error) {
-      console.log(error);
-    }
+// Get filtered products
+export async function fetchFilteredProducts(
+  query: string,
+  currentPage: number
+) {
+  noStore(); // Disable caching
+  try {
+    const res = await axios.get<Product[]>(`${API_URL}/products`, {
+      params: {
+        _page: currentPage,
+        _limit: PRODUCTS_PER_PAGE,
+        category_name: CATEGORY,
+        q: query,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 }
-
-const productService = new ProductService();
-
-export default productService;
