@@ -9,7 +9,6 @@ const LoadMoreButton = ({ totalPages }: { totalPages: number }) => {
   const currentPage = Number(searchParams.get("page")) || 1;
 
   const handleLoadMore = () => {
-    console.log("Load more");
     const params = new URLSearchParams(searchParams);
     params.set("page", String(currentPage + 1));
     // Update the URL with the new page number

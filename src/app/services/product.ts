@@ -20,7 +20,7 @@ export async function fetchFilteredProducts(
     });
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 }
@@ -34,14 +34,10 @@ export async function getProductsPages(query: string) {
         q: query,
       },
     });
-    console.log("Total products count", res.data.length); // Total products count
-    console.log(
-      "Total pages count",
-      Math.ceil(res.data.length / PRODUCTS_PER_PAGE)
-    ); // Total pages count
+
     return Math.ceil(res.data.length / PRODUCTS_PER_PAGE);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return 0;
   }
 }
