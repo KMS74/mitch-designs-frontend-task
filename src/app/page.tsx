@@ -7,6 +7,7 @@ import ShoppingCartFAB from "./components/ShoppingCartFAB/ShoppingCartFAB";
 import ProductsSkeleton from "./components/ProductSkeleton/ProductsSkeleton";
 import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 import { getProductsPages } from "./services/product";
+import Breadcrumb from "./components/Breadcrumb/Breadcrumb";
 
 export default async function Home({
   searchParams,
@@ -27,6 +28,8 @@ export default async function Home({
     >
       <SearchBox />
       <ShoppingCartFAB />
+
+      <Breadcrumb currentPage="القهوة" />
 
       <PageTitle title="جميع منتجات القهوة" />
       <Suspense fallback={<ProductsSkeleton />}>
