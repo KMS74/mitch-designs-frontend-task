@@ -1,14 +1,43 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/app/store/hooks";
 import Image from "next/image";
 import { LuHeart } from "react-icons/lu";
 import { TfiFullscreen } from "react-icons/tfi";
+import { CgSpinner } from "react-icons/cg";
+import { toast } from "react-toastify";
 import { Product } from "@/app/types/product.type";
 import placeholderImage from "/public/images/placeholder-image.jpg";
+import { addToCart } from "@/app/store/cart/cartSlice";
+import { DEBOUNCED_TIME } from "@/app/constants";
 
 type Props = {
   product: Product;
 };
 
 const ProductCard = ({ product }: Props) => {
+  const dispatch = useAppDispatch();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    if (!isButtonDisabled) return;
+
+    setIsButtonDisabled(true);
+    const timeout = setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, DEBOUNCED_TIME);
+
+    return () => {
+      clearInterval(timeout);
+    };
+  }, [isButtonDisabled]);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product.id));
+    setIsButtonDisabled(true);
+    toast.success("تمت إضافة المنتج إلى السلة");
+  };
+
   return (
     <div className="card">
       <div className="w-full relative flex items-center justify-center bg-primary-50 h-96 border-b border-solid border-gray-200">
@@ -76,8 +105,20 @@ const ProductCard = ({ product }: Props) => {
       </div>
 
       <div className="my-auto p-4 flex flex-row items-center gap-4">
-        <button className="bg-primary-950 text-sm flex-1 text-white text-start rounded-xl px-4 py-3 overflow-hidden text-ellipsis text-nowrap">
-          اضف الي السلة
+        <button
+          className="bg-primary-950 text-sm flex-1 text-white text-start rounded-xl px-4 py-3 overflow-hidden text-ellipsis text-nowrap disabled:cursor-not-allowed "
+          onClick={handleAddToCart}
+          disabled={isButtonDisabled}
+        >
+          {isButtonDisabled ? (
+            <div className="inline-flex items-center gap-2">
+              <span className="inline-block ms-2">جاري الإضافة</span>
+
+              <CgSpinner className="animate-spin inline-block" size={20} />
+            </div>
+          ) : (
+            "أضف إلى السلة"
+          )}
         </button>
         <button className="rounded-full bg-primary-50 w-12 h-12 p-2 inline-flex justify-center items-center">
           <LuHeart className=" text-primary-950" size={20} />
