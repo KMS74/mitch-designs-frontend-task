@@ -24,3 +24,24 @@ export async function fetchFilteredProducts(
     return [];
   }
 }
+
+export async function getProductsPages(query: string) {
+  noStore(); // Disable caching
+  try {
+    const res = await axios.get<Product[]>(`${API_URL}/products`, {
+      params: {
+        category_name: CATEGORY,
+        q: query,
+      },
+    });
+    console.log("Total products count", res.data.length); // Total products count
+    console.log(
+      "Total pages count",
+      Math.ceil(res.data.length / PRODUCTS_PER_PAGE)
+    ); // Total pages count
+    return Math.ceil(res.data.length / PRODUCTS_PER_PAGE);
+  } catch (error) {
+    console.log(error);
+    return 0;
+  }
+}

@@ -6,8 +6,9 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ShoppingCartFAB from "./components/ShoppingCartFAB/ShoppingCartFAB";
 import ProductsSkeleton from "./components/ProductSkeleton/ProductsSkeleton";
 import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
+import { getProductsPages } from "./services/product";
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
   searchParams?: {
@@ -17,6 +18,8 @@ export default function Home({
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = await getProductsPages(query);
+
   return (
     <main
       className="min-h-screen container relative
@@ -29,7 +32,8 @@ export default function Home({
       <Suspense fallback={<ProductsSkeleton />}>
         <ProductsList query={query} currentPage={currentPage} />
       </Suspense>
-      <LoadMoreButton />
+
+      {currentPage < totalPages && <LoadMoreButton totalPages={totalPages} />}
     </main>
   );
 }
