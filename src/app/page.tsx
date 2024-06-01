@@ -8,6 +8,7 @@ import ProductsSkeleton from "./components/ProductSkeleton/ProductsSkeleton";
 import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 import { getProductsPages } from "./services/product";
 import Breadcrumb from "./components/Breadcrumb/Breadcrumb";
+import ProductFilters from "./components/ProductFilters/ProductFilters";
 
 export default async function Home({
   searchParams,
@@ -32,6 +33,9 @@ export default async function Home({
       <Breadcrumb currentPage="القهوة" />
 
       <PageTitle title="جميع منتجات القهوة" />
+
+      <ProductFilters />
+
       <Suspense fallback={<ProductsSkeleton />}>
         <ProductsList query={query} currentPage={currentPage} />
       </Suspense>

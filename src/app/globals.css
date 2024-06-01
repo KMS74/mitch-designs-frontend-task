@@ -34,3 +34,16 @@ body {
     @apply bg-white shadow-sm drop-shadow-sm border border-solid border-gray-200 rounded-xl overflow-hidden flex flex-col;
   }
 }
+
+/* Define your custom scrollbar styles */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-950 rounded-lg;
+}
