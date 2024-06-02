@@ -51,7 +51,10 @@ const ProductCard = ({ product }: Props) => {
           fill
           alt={product?.ar_name}
         />
-        <button className="absolute shadow-lg drop-shadow-lg bottom-4 left-4 inline-flex items-center justify-center p-2 bg-white border-2 border-solid border-gray-500 rounded-full">
+        <button
+          className="absolute shadow-lg drop-shadow-lg bottom-4 left-4 inline-flex items-center justify-center p-2 bg-white border-2 border-solid border-gray-500 rounded-full"
+          aria-label="full-size"
+        >
           <TfiFullscreen size={20} />
         </button>
       </div>
@@ -120,7 +123,10 @@ const ProductCard = ({ product }: Props) => {
             "أضف إلى السلة"
           )}
         </button>
-        <button className="rounded-full bg-primary-50 w-12 h-12 p-2 inline-flex justify-center items-center">
+        <button
+          className="rounded-full bg-primary-50 w-12 h-12 p-2 inline-flex justify-center items-center"
+          aria-label="add-to-whish"
+        >
           <LuHeart className=" text-primary-950" size={20} />
         </button>
       </div>
