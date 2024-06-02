@@ -1,3 +1,8 @@
+## [Live Preview](https://mitch-designs-frontend-task.vercel.app/)
+![image](https://github.com/KMS74/mitch-designs-frontend-task/assets/51063078/e0da7411-5287-461e-8648-255659cab582)
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
