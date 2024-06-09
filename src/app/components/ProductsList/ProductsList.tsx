@@ -2,13 +2,12 @@ import NoProductsFound from "../NoProductsFound/NoProductsFound";
 import ProductCard from "../ProductCard/ProductCard";
 import { fetchFilteredProducts } from "@/app/services/product";
 
-const ProductsList = async ({
-  query,
-  currentPage,
-}: {
+type Props = {
   query: string;
   currentPage: number;
-}) => {
+};
+
+const ProductsList = async ({ query, currentPage }: Props) => {
   const products = await fetchFilteredProducts(query, currentPage);
 
   if (products.length === 0) {
