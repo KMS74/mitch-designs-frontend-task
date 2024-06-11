@@ -9,6 +9,7 @@ import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 import { getProductsPages } from "./services/product";
 import Breadcrumb from "./components/Breadcrumb/Breadcrumb";
 import ProductFilters from "./components/ProductFilters/ProductFilters";
+import CategoriesSkeleton from "./components/CategoriesSkeleton/CategoriesSkeleton";
 
 export default async function Home({
   searchParams,
@@ -16,11 +17,14 @@ export default async function Home({
   searchParams?: {
     query?: string;
     page?: string;
+    category?: string;
   };
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await getProductsPages(query);
+  const selectedCategory = searchParams?.category || "";
+  const totalPages = await getProductsPages(query, selectedCategory);
+  console.log("totalPages", totalPages);
 
   return (
     <main
@@ -28,6 +32,7 @@ export default async function Home({
      mx-auto p-4"
     >
       <SearchBox />
+
       <ShoppingCartFAB />
 
       <Breadcrumb currentPage="القهوة" />
@@ -37,7 +42,11 @@ export default async function Home({
       <ProductFilters />
 
       <Suspense fallback={<ProductsSkeleton />}>
-        <ProductsList query={query} currentPage={currentPage} />
+        <ProductsList
+          query={query}
+          currentPage={currentPage}
+          selectedCategory={selectedCategory}
+        />
       </Suspense>
 
       {currentPage < totalPages && <LoadMoreButton totalPages={totalPages} />}
