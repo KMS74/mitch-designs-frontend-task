@@ -5,10 +5,19 @@ import { fetchFilteredProducts } from "@/app/services/product";
 type Props = {
   query: string;
   currentPage: number;
+  selectedCategory: string;
 };
 
-const ProductsList = async ({ query, currentPage }: Props) => {
-  const products = await fetchFilteredProducts(query, currentPage);
+const ProductsList = async ({
+  query,
+  currentPage,
+  selectedCategory,
+}: Props) => {
+  const products = await fetchFilteredProducts(
+    query,
+    currentPage,
+    selectedCategory
+  );
 
   if (products.length === 0) {
     return <NoProductsFound />;

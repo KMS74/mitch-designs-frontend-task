@@ -18,14 +18,16 @@ const Breadcrumb = ({ currentPage }: Props) => {
           </Link>
         </li>
 
-        <li aria-current="page">
-          <div className="flex items-center">
-            <IoIosArrowBack className="text-gray-400" />
-            <span className="ms-1 font-medium text-gray-500 md:ms-2">
-              {currentPage}
-            </span>
-          </div>
-        </li>
+        {currentPage && (
+          <li aria-current="page">
+            <div className="flex items-center">
+              <IoIosArrowBack className="text-gray-400" />
+              <span className="ms-1 font-medium text-gray-500 md:ms-2">
+                {currentPage}
+              </span>
+            </div>
+          </li>
+        )}
       </ol>
     </nav>
   );

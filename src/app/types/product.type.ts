@@ -17,3 +17,8 @@ export type Product = {
   price_uae: string;
   sale_price_uae: string;
 };
+
+export type Category = {
+  categoryNameEn: string;
+  categoryNameAr: string;
+};

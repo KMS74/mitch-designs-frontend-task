@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-
 import PageTitle from "./components/PageTitle/PageTitle";
 import ProductsList from "./components/ProductsList/ProductsList";
 import SearchBox from "./components/SearchBox/SearchBox";
@@ -16,11 +15,13 @@ export default async function Home({
   searchParams?: {
     query?: string;
     page?: string;
+    category?: string;
   };
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await getProductsPages(query);
+  const selectedCategory = searchParams?.category || "";
+  const totalPages = await getProductsPages(query, selectedCategory);
 
   return (
     <main
@@ -28,16 +29,28 @@ export default async function Home({
      mx-auto p-4"
     >
       <SearchBox />
+
       <ShoppingCartFAB />
 
-      <Breadcrumb currentPage="القهوة" />
+      <Breadcrumb currentPage={selectedCategory} />
 
-      <PageTitle title="جميع منتجات القهوة" />
+      <PageTitle
+        title={
+          selectedCategory ? 
+          `جميع منتجات ${selectedCategory}`
+          
+          : "جميع المنتجات"
+        }
+      />
 
       <ProductFilters />
 
       <Suspense fallback={<ProductsSkeleton />}>
-        <ProductsList query={query} currentPage={currentPage} />
+        <ProductsList
+          query={query}
+          currentPage={currentPage}
+          selectedCategory={selectedCategory}
+        />
       </Suspense>
 
       {currentPage < totalPages && <LoadMoreButton totalPages={totalPages} />}
