@@ -24,7 +24,6 @@ export default async function Home({
   const currentPage = Number(searchParams?.page) || 1;
   const selectedCategory = searchParams?.category || "";
   const totalPages = await getProductsPages(query, selectedCategory);
-  console.log("totalPages", totalPages);
 
   return (
     <main

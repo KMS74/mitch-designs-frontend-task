@@ -20,7 +20,6 @@ export async function fetchFilteredProducts(
         q: query,
       },
     });
-    // console.log("res.data", res.data);
     return res.data;
   } catch (error) {
     console.error(error);

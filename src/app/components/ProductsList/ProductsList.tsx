@@ -13,7 +13,6 @@ const ProductsList = async ({
   currentPage,
   selectedCategory,
 }: Props) => {
-  console.log("selectedCategory", selectedCategory);
   const products = await fetchFilteredProducts(
     query,
     currentPage,
