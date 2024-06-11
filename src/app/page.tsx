@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-
 import PageTitle from "./components/PageTitle/PageTitle";
 import ProductsList from "./components/ProductsList/ProductsList";
 import SearchBox from "./components/SearchBox/SearchBox";
