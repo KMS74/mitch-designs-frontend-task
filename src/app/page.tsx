@@ -8,7 +8,6 @@ import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 import { getProductsPages } from "./services/product";
 import Breadcrumb from "./components/Breadcrumb/Breadcrumb";
 import ProductFilters from "./components/ProductFilters/ProductFilters";
-import CategoriesSkeleton from "./components/CategoriesSkeleton/CategoriesSkeleton";
 
 export default async function Home({
   searchParams,
@@ -33,9 +32,16 @@ export default async function Home({
 
       <ShoppingCartFAB />
 
-      <Breadcrumb currentPage="القهوة" />
+      <Breadcrumb currentPage={selectedCategory} />
 
-      <PageTitle title="جميع منتجات القهوة" />
+      <PageTitle
+        title={
+          selectedCategory ? 
+          `جميع منتجات ${selectedCategory}`
+          
+          : "جميع المنتجات"
+        }
+      />
 
       <ProductFilters />
 

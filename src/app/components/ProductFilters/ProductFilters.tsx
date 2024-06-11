@@ -59,9 +59,7 @@ const ProductFilters = () => {
             key={category.categoryNameAr}
             type="button"
             className={`inline-flex justify-center items-center gap-2 text-primary-950 bg-primary-50  font-medium rounded-full px-5 py-2.5 text-center me-2 mb-2 ${
-              isSelectedCategory(category)
-                ? "bg-primary-950 text-primary-50"
-                : ""
+              isSelectedCategory(category) ? "bg-primary-950 text-white" : ""
             }`}
             onClick={() => handleCategoryFilter(category)}
           >
